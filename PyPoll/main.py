@@ -33,7 +33,7 @@ with open(csvpath) as csvfile:
         # Adds a vote for each row in csv file
         totalvotes += 1
 
-        # Set of conditionals to check the name of the candidate, adds vote to that candidate
+        # Set of conditionals to check the name on the vote, adds to appropriate candidate's total
         if (row[2] == candidates["name"][0]):
             candidates["votes"][0] += 1
         
