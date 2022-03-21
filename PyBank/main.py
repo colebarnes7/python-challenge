@@ -30,6 +30,7 @@ with open(csvpath) as csvfile:
     # Reads the header row of the csv file
     csvheader = next(csvreader)
 
+    # Loop to go through each row in csv file
     for row in csvreader:
         
         # Adds one to the months for each row
