@@ -55,7 +55,7 @@ for i in range(len(profit_loss)):
     # Conditional to keep the values in range
     if (i < len(profit_loss)-1):
 
-        # Calculates the difference between this month and previous
+        # Calculates the difference between next month and current month
         currentchange = profit_loss[i+1] - profit_loss[i]
     
         # Calculates the total change for the length of the data
