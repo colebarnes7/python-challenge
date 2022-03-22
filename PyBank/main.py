@@ -8,10 +8,11 @@ csvpath = os.path.join('Resources', 'budget_data.csv')
 # Declare Variables
 totalmonths = 0
 nettotal = 0
+currentvalue = 0
+profit_loss = []
+month = []
 currentchange = 0
 totalchange = 0
-currentmonth = 0
-previousmonth = 0
 averagechange = 0
 greatestincrease = 0
 gimonth = ""
@@ -37,31 +38,41 @@ with open(csvpath) as csvfile:
         totalmonths += 1
 
         # Pulls the current monthly total
-        currentmonth = int(row[1])
+        currentvalue = int(row[1])
 
         # Adds the monthly total to the profits/losses
-        nettotal = nettotal + currentmonth
+        nettotal = nettotal + currentvalue
 
-        # Grabs the change from this month to last month
-        currentchange = currentmonth - previousmonth
-        
-        # Calculates the total change from month to month
+        # Adds monthly total to a list
+        profit_loss.append(currentvalue)
+
+        # Adds month to a list
+        month.append(row[0])
+
+# Loop to go through all the monthly profit/loss values
+for i in range(len(profit_loss)):
+    
+    # Conditional to keep the values in range
+    if (i < len(profit_loss)-1):
+
+        # Calculates the difference between this month and previous
+        currentchange = profit_loss[i+1] - profit_loss[i]
+    
+        # Calculates the total change for the length of the data
         totalchange = totalchange + currentchange
+    
+    # Conditionals to determine the greatest increase and decrease in profits/losses
+    # Assigns the appropriate month as well
+    if (currentchange > greatestincrease):
+        greatestincrease = currentchange
+        gimonth = month[i]
 
-        # Checks if this month's increase is the largest
-        if (currentchange > greatestincrease):
-            greatestincrease = currentchange
-            gimonth = row[0]
-        
-        # Checks if this month's decrease is the largest
-        if (currentchange < greatestdecrease):
-            greatestdecrease = currentchange
-            gdmonth = row[0]
+    if (currentchange < greatestdecrease):
+        greatestdecrease = currentchange
+        gdmonth = month[i]
 
-        # Holds the previous month for next iteration
-        previousmonth = int(row[1])
-
-averagechange = round(totalchange/totalmonths, 2)
+# Calculates the average change over the course of the data
+averagechange = round(totalchange/(totalmonths-1), 2)
 
 # Outputs the appropriate data formatted to the Terminal
 print("Financial Analysis")
