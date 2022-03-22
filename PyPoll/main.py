@@ -73,7 +73,7 @@ print("Winner: " + winner)
 print("------------------------------")
 
 # Sets up the analysis file
-output_file = os.path.join("Analysis", "census_results.csv")
+output_file = os.path.join("Analysis", "election_results.csv")
 
 # Opens the file to write into
 with open(output_file, "w") as datafile:
@@ -90,3 +90,4 @@ with open(output_file, "w") as datafile:
     writer.writerow(["------------------------------"])
     writer.writerow(["Winner: " + winner])
     writer.writerow(["------------------------------"])
+
